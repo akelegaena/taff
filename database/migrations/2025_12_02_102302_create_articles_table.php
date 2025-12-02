@@ -4,11 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
-    /**
-     * Run the migrations.
-     */
+return new class extends Migration {
     public function up(): void
     {
         Schema::create('articles', function (Blueprint $table) {
@@ -18,17 +14,13 @@ return new class extends Migration
             $table->foreignId('category_id')->nullable()->constrained()->nullOnDelete();
             $table->foreignId('supplier_id')->nullable()->constrained('suppliers')->nullOnDelete();
             $table->integer('stock')->default(0);
-            $table->integer('reorder_point')->default(0); // seuil d'alerte
-            $table->decimal('unit_price', 12,2)->nullable();
+            $table->integer('reorder_point')->default(0);
+            $table->decimal('unit_price', 12, 2)->nullable();
             $table->text('description')->nullable();
             $table->timestamps();
         });
-
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('articles');
